@@ -1,0 +1,44 @@
+// libbtif_ext static library for target
+// ========================================================
+
+soong_config_module_type_import {
+    from: "device/qcom/qssi/Android.bp",
+    module_types: [
+         "aosp_vs_qva_cc_defaults",
+    ],
+}
+aosp_vs_qva_cc_defaults {
+     name: "qva_osi_cc_defaults",
+     soong_config_variables: {
+         aosp_or_qva: {
+           qva: {
+             static_libs: [
+               "libosi",
+               "libbt-utils",
+             ],
+           }
+        }
+    }
+}
+
+cc_library_static {
+    name: "libosi_ext",
+    defaults: ["fluoride_defaults_qti", "qva_osi_cc_defaults"],
+    include_dirs: [
+        "vendor/qcom/opensource/commonsys/system/bt",
+        "vendor/qcom/opensource/commonsys/system/bt/internal_include",
+        "vendor/qcom/opensource/commonsys/system/bt/stack/include",
+        "vendor/qcom/opensource/commonsys/system/bt/btif/include",
+        "vendor/qcom/opensource/commonsys/system/bt/utils/include/",
+        "vendor/qcom/opensource/commonsys/bluetooth_ext/system_bt_ext/include/",
+    ],
+    srcs: [
+        "src/vnd_log.cc",
+    ],
+    shared_libs: [
+        "libcutils",
+        "libutils",
+        "libhardware",
+    ],
+    cflags: ["-DBUILDCFG"],
+}

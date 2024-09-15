@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="settings_rog_highlight_color">#cc0022</color>
+    <color name="settings_zenUI_highlight_color">#cc0022</color>
+    <color name="icon_tint_color">#727272</color>
+</resources>

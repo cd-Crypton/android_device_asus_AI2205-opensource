@@ -1,0 +1,27 @@
+//btrftest
+cc_binary {
+    name: "btrftest",
+    defaults : ["fluoride_defaults_qti"],
+    cflags: [
+        "-Wall",
+        "-Wno-sometimes-uninitialized",
+        "-Wunused-function",
+    ],
+    srcs: [
+      "btrftest.cpp",
+      "btconfig.c",
+    ],
+    include_dirs: [
+      "vendor/qcom/opensource/commonsys/system/bt/hci/include",
+    ],
+    shared_libs: [
+      "libcutils",
+      "libutils",
+      "libc",
+      "libhardware",
+      "liblog",
+    ],
+    static_libs: [
+      "libbluetooth-types",
+    ]
+}

@@ -1,0 +1,48 @@
+LOCAL_PATH:= $(call my-dir)
+
+#btrftest
+include $(CLEAR_VARS)
+LOCAL_MODULE_TAGS := debug
+bdroid_C_INCLUDES := $(BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR)
+bdroid_CFLAGS := -DHAS_BDROID_BUILDCFG
+LOCAL_CFLAGS += $(bdroid_CFLAGS)
+LOCAL_C_INCLUDES += \
+	$(bdroid_C_INCLUDES) \
+	$(TOP_DIR)system/bt/include
+
+LOCAL_SRC_FILES := btrftest.cpp
+LOCAL_SHARED_LIBRARIES += libc libutils libcutils libhardware liblog
+LOCAL_STATIC_LIBRARIES += libbluetooth-types
+LOCAL_MODULE := btrftest
+LOCAL_MODULE_OWNER := asus
+LOCAL_PROPRIETARY_MODULE := true
+include $(BUILD_EXECUTABLE)
+
+#btrftestd
+include $(CLEAR_VARS)
+LOCAL_MODULE_TAGS := debug
+bdroid_C_INCLUDES := $(BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR)
+bdroid_CFLAGS := -DHAS_BDROID_BUILDCFG
+LOCAL_CFLAGS += $(bdroid_CFLAGS)
+LOCAL_C_INCLUDES += \
+	$(bdroid_C_INCLUDES) \
+	$(TOP_DIR)system/bt/include \
+	$(TOP_DIR)vendor/qcom/opensource/commonsys/system/bt
+
+LOCAL_SRC_FILES := btrftestd.cpp
+LOCAL_SHARED_LIBRARIES += libc libutils libcutils libhardware liblog libchrome
+#libchrome
+#libbtif_qti
+LOCAL_STATIC_LIBRARIES += libbluetooth-types libbtcore_qti
+#libbtif_qti
+
+LOCAL_MODULE := btrftestd
+LOCAL_MODULE_OWNER := asus
+LOCAL_PROPRIETARY_MODULE := true
+include $(BUILD_EXECUTABLE)
+
+
+$(shell cp $(LOCAL_PATH)/btoff.sh $(TARGET_OUT)/bin/)
+# Cleanup our locals
+bdroid_C_INCLUDES :=
+bdroid_CFLaGS :=

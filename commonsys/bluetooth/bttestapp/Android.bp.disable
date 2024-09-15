@@ -1,0 +1,22 @@
+android_app {
+    name: "BTTestApp",
+    system_ext_specific: true,
+
+    srcs: [
+        "src/**/*.java",
+    ],
+
+     static_libs: [
+     "com.google.android.material_material",
+     "androidx.appcompat_appcompat",
+     ],
+
+    certificate: "platform",
+
+    owner: "qti",
+
+    optimize: {
+        enabled: false,
+    },
+    platform_apis: true,
+}

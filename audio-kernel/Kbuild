@@ -1,0 +1,20 @@
+obj-y := dsp/ ipc/ soc/ asoc/ asoc/codecs/ asoc/codecs/lpass-cdc/ asoc/codecs/bolero/ asoc/codecs/wsa884x/ asoc/codecs/wcd938x/ asoc/codecs/wsa883x/ asoc/codecs/wcd937x/
+
+ifeq ($(ASUS_AI2205_AUDIO), y)
+$(warning build audio cs35l45 in Kbuild for AI2205...)
+obj-y += asoc/codecs/cs35l45/
+
+KBUILD_CPPFLAGS += -DASUS_AI2205_PROJECT=1
+endif
+
+ifeq ($(ASUS_FTM_AUDIO), y)
+$(warning build audio factory function in Kbuild for AI2205...)
+KBUILD_CPPFLAGS += -DASUS_FTM_BUILD=1
+endif
+
+ifeq ($(ASUS_GKI_AUDIO),y)
+$(warning "build audio with GKI")
+KBUILD_CPPFLAGS += -DASUS_GKI_BUILD=1
+else
+$(warning "build audio without GKI")
+endif
